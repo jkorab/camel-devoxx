@@ -46,5 +46,5 @@ we deliver commercial training courses that are open-admission, which can be tai
 
 For individual technical questions around Apache Camel, the best places to ask are:
 
-* http://camel.465427.n5.nabble.com/ - the official Apache Camel users mailing list on Nabble
+* http://camel.465427.n5.nabble.com/Camel-Users-f465428.html - the official Apache Camel users mailing list on Nabble
 * http://stackoverflow.com - chock full of helpful people including Camel committers
