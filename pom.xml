@@ -64,6 +64,7 @@
 
   <modules>
     <module>backend-model</module>
+    <module>backend-stub</module>
     <module>rest-jms-proxy</module>
   </modules>
 

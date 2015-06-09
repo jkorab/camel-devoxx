@@ -1,4 +1,4 @@
-package com.ameliant.devoxx;
+package com.ameliant.devoxx.model.util;
 
 import com.ameliant.devoxx.model.Order;
 import com.ameliant.devoxx.model.OrderDetails;
@@ -7,6 +7,8 @@ import com.ameliant.devoxx.model.OrderStatus;
 import java.math.BigDecimal;
 
 /**
+ * Utility class for building dummy OrderDetails.
+ *
  * @author jkorab
  */
 public class OrderDetailsBuilder {

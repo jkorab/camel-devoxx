@@ -3,6 +3,7 @@ package com.ameliant.devoxx;
 import com.ameliant.devoxx.model.OrderDetails;
 import com.ameliant.devoxx.model.OrderQuery;
 import com.ameliant.devoxx.model.OrderStatus;
+import com.ameliant.devoxx.model.util.OrderDetailsBuilder;
 import com.ameliant.devoxx.util.EmbeddedActiveMQBroker;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;

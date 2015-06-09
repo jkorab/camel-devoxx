@@ -14,6 +14,7 @@
   <packaging>war</packaging>
 
   <properties>
+    <hawtio-version>1.4.51</hawtio-version>
     <jetty-version>7.6.9.v20130131</jetty-version>
   </properties>
 
@@ -113,8 +114,20 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty-version}</version>
         <configuration>
+          <contextHandlers>
+            <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+              <war>../backend-stub/target/backend-stub-${project.version}.war</war>
+              <contextPath>/backend-stub</contextPath>
+            </contextHandler>
+            <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+              <war>
+                ${settings.localRepository}/io/hawt/hawtio-default/${hawtio-version}/hawtio-default-${hawtio-version}.war
+              </war>
+              <contextPath>/hawtio</contextPath>
+            </contextHandler>
+          </contextHandlers>
           <webAppConfig>
-            <contextPath>/</contextPath>
+            <contextPath>/devoxx</contextPath>
           </webAppConfig>
           <systemProperties>
             <!-- enable easy JMX connection to JConsole -->
@@ -122,9 +135,23 @@
               <name>com.sun.management.jmxremote</name>
               <value/>
             </systemProperty>
+            <systemProperty>
+              <name>hawtio.authenticationEnabled</name>
+              <value>false</value>
+            </systemProperty>
           </systemProperties>
           <scanIntervalSeconds>10</scanIntervalSeconds>
         </configuration>
+          <dependencies>
+          <!-- This ensures that WAR files are downloaded from the repo -->
+          <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>hawtio-default</artifactId>
+            <version>${hawtio-version}</version>
+            <scope>compile</scope>
+            <type>war</type>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
