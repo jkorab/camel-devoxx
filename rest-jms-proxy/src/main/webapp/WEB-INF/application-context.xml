@@ -6,13 +6,9 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     ">
 
-  <import resource="jms-context.xml"/>
-
   <bean id="servlet" class="org.apache.camel.component.servlet.ServletComponent"/>
 
   <camelContext id="rest-jms-proxy" xmlns="http://camel.apache.org/schema/spring" >
-
-    <routeBuilder ref="restJmsProxy"/>
 
     <restConfiguration bindingMode="off" component="servlet" port="8080"/>
 
@@ -27,9 +23,5 @@
     </rest>
 
   </camelContext>
-
-  <bean id="restJmsProxy" class="com.ameliant.devoxx.RestJmsProxyRoute">
-    <property name="backendUri" value="jms:backend"/>
-  </bean>
 
 </beans>

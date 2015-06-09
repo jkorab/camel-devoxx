@@ -278,16 +278,24 @@
               <war>rest-jms-proxy/target/rest-jms-proxy-${project.version}.war</war>
               <contextPath>/devoxx</contextPath>
             </contextHandler>
+
+            <!-- Uncomment for stubbed backend -->
+            <!--
             <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
               <war>backend-stub/target/backend-stub-${project.version}.war</war>
               <contextPath>/backend-stub</contextPath>
             </contextHandler>
+            -->
+
+            <!-- Uncomment for HawtIO console; also uncomment dependency below -->
+            <!--
             <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
               <war>
                 ${settings.localRepository}/io/hawt/hawtio-default/${hawtio-version}/hawtio-default-${hawtio-version}.war
               </war>
               <contextPath>/hawtio</contextPath>
             </contextHandler>
+            -->
           </contextHandlers>
           <systemProperties>
             <!-- enable easy JMX connection to JConsole -->
@@ -304,6 +312,8 @@
           <stopPort>9999</stopPort>
           <scanIntervalSeconds>10</scanIntervalSeconds>
         </configuration>
+        <!-- Uncomment for HawtIO console; also uncomment contextHandler above -->
+        <!--
         <dependencies>
           <dependency>
             <groupId>io.hawt</groupId>
@@ -313,6 +323,7 @@
             <type>war</type>
           </dependency>
         </dependencies>
+        -->
       </plugin>
 
     </plugins>

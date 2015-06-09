@@ -4,9 +4,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.test.AvailablePortFinder;
 
-/**
- * @author jkorab
- */
 public class RestConfigRoute extends RouteBuilder {
 
     private int jettyPort = AvailablePortFinder.getNextAvailable();
