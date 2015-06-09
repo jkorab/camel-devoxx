@@ -22,10 +22,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.ameliant</groupId>
+  <groupId>com.ameliant.devoxx</groupId>
   <artifactId>camel-devoxx</artifactId>
   <packaging>pom</packaging>
-  <version>1.x-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <inceptionYear>2013</inceptionYear>
 
   <name>${application-name}</name>
@@ -63,6 +63,7 @@
   </properties>
 
   <modules>
+    <module>backend-model</module>
     <module>rest-jms-proxy</module>
   </modules>
 

@@ -28,11 +28,10 @@ public class RestJmsProxyRouteTest extends CamelTestSupport {
             String orderId = in.getHeader("id", String.class);
 
             OrderDetails orderDetails = new OrderDetailsBuilder().buildOrderDetails(orderId);
-
             in.setBody(orderDetails);
         });
 
-        OrderDetails response = template.requestBodyAndHeader("direct:fetchOrders", new Object(), "id", "123", OrderDetails.class);
+        OrderDetails response = template.requestBodyAndHeader("direct:fetchOrders", null, "id", "123", OrderDetails.class);
 
         assertNotNull(response);
         assertEquals(OrderStatus.New, response.getOrderStatus());

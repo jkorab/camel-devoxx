@@ -11,6 +11,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jetty8.JettyHttpComponent8;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.model.dataformat.JaxbDataFormat;
 import org.apache.camel.test.junit4.CamelTestSupport;
@@ -18,6 +19,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 public class RestJmsProxyRouteTransportTest extends CamelTestSupport {
+
+    public static final String MOCK_BACKEND = "mock:backend";
 
     @Rule
     public EmbeddedActiveMQBroker embeddedBroker = new EmbeddedActiveMQBroker("myBroker");
@@ -67,13 +70,7 @@ public class RestJmsProxyRouteTransportTest extends CamelTestSupport {
                         from("jms:backend").routeId("harness.backend")
                             .unmarshal(jaxb) // OrderQuery
                             .log("Backend received: ${body}")
-                            .process((exchange) -> {
-                                Message in = exchange.getIn();
-                                OrderQuery orderQuery = in.getBody(OrderQuery.class);
-                                String orderId = orderQuery.getOrderId();
-                                OrderDetails orderDetails = new OrderDetailsBuilder().buildOrderDetails(orderId);
-                                in.setBody(orderDetails);
-                            })
+                            .to(MOCK_BACKEND)
                             .marshal(jaxb);
 
                     }
@@ -83,7 +80,18 @@ public class RestJmsProxyRouteTransportTest extends CamelTestSupport {
 
     @Test
     public void testFetchOrders() {
+        MockEndpoint mockBackend = getMockEndpoint(MOCK_BACKEND);
+        mockBackend.whenAnyExchangeReceived((exchange) -> {
+            Message in = exchange.getIn();
+            OrderQuery orderQuery = in.getBody(OrderQuery.class);
+            String orderId = orderQuery.getOrderId();
+
+            OrderDetails orderDetails = new OrderDetailsBuilder().buildOrderDetails(orderId);
+            in.setBody(orderDetails);
+        });
+
         OrderDetails response = template.requestBodyAndHeader("direct:in", null, "id", "123", OrderDetails.class);
+
         assertNotNull(response);
         assertEquals(OrderStatus.New, response.getOrderStatus());
         assertEquals("123", response.getOrder().getOrderId());
