@@ -5,8 +5,8 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-  <description>Ameliant ActiveMQ Analytics Backend</description>
-  <display-name>Ameliant ActiveMQ Analytics Backend</display-name>
+  <description>Stubbed Backend</description>
+  <display-name>Stubbed Backend</display-name>
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
